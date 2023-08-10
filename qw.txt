@@ -1,0 +1,69 @@
+
+#QoS Quality of Service
+    - QoS adalah cara yang digunakan untuk mengatur
+    penggunaan bandwidth yang ada secara rasional.
+
+@tujuan
+    - Qos juga digunakan untuk mengatur prioritas
+    berdasarkan parameter yang diberikan, menghindari
+    terjadinya trafik yang memonopoli seluruh bandwidth
+    yang tersedia. 
+
+@contoh
+    -Simple Queue
+    -Burst
+    -PCQ
+    -Staged Limitation
+    -Queue Tree
+
+#Simple Queue
+    - Dengan simple queue, kita dapat
+    melakukan:
+        + Melimit tx-rate client (upload)
+        + Melimit rx-rate client (download)
+        + Melimit tx+rx-rate client (akumulasi) 
+
+#Burst
+    - Burst memungkinkan penggunaan data-rate yang
+    melebihi max-limit untuk periode waktu tertentu
+    - Jika data rate lebih kecil dari burst-threshold, burst
+    dapat dilakukan hingga data-rate mencapai burst-limit
+
+#Staged Limitation
+    - Pada RouterOS, dikenal 2 buah limitasi:
+        + CIR (Committed Information Rate)
+            ~ dalam keadaan terburuk, client akan mendapatkan
+            bandwidth sesuai dengan
+            "limit-at" (dengan asumsi bandwidth yang tersedia
+            cukup untuk CIR semua client)
+        + MIR (Maximal Information Rate)
+            ~ jika masih ada bandwidth yang tersisa setelah
+            semua client mencapai "limit-at", maka client bisa
+            mendapatkan bandwidth tambahan hingga "maxlimit"
+
+#PCQ (Per Connection Queue)
+    - Untuk kondisi client yang sangat banyak dan sangat
+    merepotkan jika harus membuat banyak rule maka bisa
+    menggunakan metode PCQ :
+        + PCQ dibuat sebagai penyempurnaan SFQ.
+        + PCQ bisa membatasi bandwith client secara merata
+        + PCQ membutuhkan memori yang cukup besar
+
+#Queue Tree & Mangle
+    - QueueTree adalah tool mikrotik yang memiliki
+    kemampuan melimitasi bandwith yang lebih
+    lengkap dibandingkan dengan simple-queue.
+
+#Mangle
+    - Mangle adalah cara untuk menandai paket-paket data
+    tertentu, dan kita akan menggunakan tanda tersebut
+    pada fitur lainnya, misalnya pada filter, routing, NAT,
+    ataupun queue.
+
+#Type of Mark
+    - Packet Mark
+        + Penandaan untuk setiap paket data
+    - Connection Mark
+        + Penandaan untuk koneksi
+    - Route Mark
+        + Penandaan paket khusus untuk routing 
